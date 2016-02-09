@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="http://code.jquery.com/qunit/qunit-1.21.0.css">
+	<script src="http://code.jquery.com/qunit/qunit-1.21.0.js"></script>
+	<script src= "js/toBeTested.js"></script>
+
+
+
+</head>
+<body>
+
+	<div id="qunit"></div>
+
+	<div id="first"><p>This is the first p-tag</p></div>
+	<div id="second"><p>This is the second p-tag</p></div>
+
+</body>
+	<script>
+	
+		QUnit.test("test loop function", function( assert ){
+			var testArray = [0,1,2];
+			var num = 0;
+			loop(testArray, function(value, index){
+				assert.equal(value, num++);
+			});
+		});
+	
+		QUnit.test("test the array context", function( assert ){
+			assert.equal(length,0);
+			domElems.add("first");
+			assert.equal(length,1);
+			assert.equal(typeof domElems[0], 'object');
+
+		});
+
+	</script>
+</html>
