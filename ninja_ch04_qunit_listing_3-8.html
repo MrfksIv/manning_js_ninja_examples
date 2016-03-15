@@ -1,0 +1,101 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content-"width=display-wdith, initial-scale=1">
+	<link rel="stylesheet" href="http://code.jquery.com/qunit/qunit-1.21.0.css">
+	<script src="http://code.jquery.com/qunit/qunit-1.21.0.js"></script>
+	<script src="http://code.jquery.com/jquery-1.12.0.min.js"></script>
+	<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+
+
+	<script>
+
+
+	/*
+	 * if only one argument is passeed, then a new function is returned which takes only
+	 * only ony argument and adds it to the first argument given when initially called the function.
+	 */
+
+	function add(x , y ) {
+		var oldx = x,
+			oldy = y
+
+		if(typeof oldy === 'undefined'){
+			return function(newY) {
+
+				return oldx + newY;
+			}
+		}
+		return x+y;
+	}
+
+	function multiply(x,y){
+		return x*y;
+	}
+
+	/*
+	 * The split function breaks a string into an array based on the delimiter given as
+	 * as an argument when calling the function.
+	 */
+	
+	var phrase = "How,are,you,today?";
+	var phraseArr = phrase.split(',');
+//	console.log(phraseArr);
+
+	/*
+	 * We can partially apply arguments to a native functino using the .partial() function.
+	 */
+
+
+	 Function.prototype.partial = function() {
+	 	var fn = this,
+	 		args = Array.prototype.slice.call(arguments);
+	 		console.log(args);
+	 		return function(){
+	 			var arg = 0;
+	 			console.log("initial args: ");
+	 			console.log(args);
+	 			console.log("initial arguments: ");
+	 			console.log(arguments);
+	 			for (var i=0; i < args.length && arg < arguments.length; i++) {
+	 				if (args[i] === undefined)
+	 					args[i] = arguments[arg++];
+	 			}
+	 			console.log("final: ");
+	 			console.log(args);
+	 			return fn.apply(this, args);
+	 		 }
+	 }
+
+//	 String.prototype.csv = String.prototype.split.partial(/,\s*/);
+
+	// var phraseArr2 = phrase.csv();
+
+	 var multiply3 = multiply.partial(3, undefined);
+
+
+	window.onload = function(){
+
+		var add20 = add(20);	
+
+
+
+		QUnit.test("check if the curry function was successful", function(assert) {
+			assert.equal(add20(5), 25);
+			assert,equal(multiply3(5), 15);
+		
+		});
+	}
+
+	</script>
+</head>
+
+<body>
+	<div id="qunit"></div>
+	<button id="test">Click Me!</button>
+</body>
+
+
+
+</html>

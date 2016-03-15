@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="http://code.jquery.com/qunit/qunit-1.21.0.css">
+	<script src="http://code.jquery.com/qunit/qunit-1.21.0.js"></script>
+	<script src= "js/ninja_book_ch04.js"></script>
+
+	<script>
+	window.onload = function(){	
+
+		QUnit.test("addition", function( assert ){
+			assert.equal(add2(3,5), 8);
+		});
+
+		QUnit.test("a display of how closures work", function(assert){
+
+			var outerValue = true;
+
+	 		function outerFn(arg1) {
+	 			var innerValue = true;
+	 			assert.equal(outerFn && outerValue , true);
+	 		}
+
+	 		outerFn(true);
+		});
+
+		QUnit.test("a display of how closures work", function(assert){
+
+			var counter = 0;
+			var elem = document.getElementById("box");
+
+			var timer = setInterval(function() {
+				if(counter < 100) {
+					elem.style.left = (counter*5) + "px";
+					counter ++;
+				} else {
+					assert.equal(counter, 100);
+					clearInterval(timer);
+				}
+			}, 100);
+		});
+	}
+	</script>
+</head>
+<body>
+	<div id="qunit"></div>
+	<h1>html page loaded</h1>
+	<div id="box" style="position:absolute;">Box!</div>
+
+
+</body>
+</html>

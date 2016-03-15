@@ -7,7 +7,51 @@
 	<script src="http://code.jquery.com/qunit/qunit-1.21.0.js"></script>
 	<script src= "js/toBeTested.js"></script>
 
+	<script>
+	window.onload = function(){	
 
+		QUnit.test("test loop function", function( assert ){
+			var testArray = [0,1,2];
+			var num = 0;
+			loop(testArray, function(value, index){
+				assert.equal(value, num++);
+			});
+		});
+	
+		QUnit.test("test the array context", function( assert ){
+			assert.equal(domElements.length, 0);
+			domElements.find("first");
+			assert.equal(domElements.length,1);
+			assert.equal(typeof domElements[0], 'object');
+
+		});
+
+		QUnit.test("test the max function", function( assert ){
+			var testArray = [0,1,2,4,5];
+			assert.equal(maxVal(testArray), 5);
+		});
+
+		QUnit.test("evaluate how overloading works", function( assert ){
+			assert.equal(printFirstArg("1st", "2nd", "3rd"), "1st");
+		});
+
+		QUnit.test("evaluate the difference between arguments.length & fnName.length", function( assert ){
+			assert.equal(arg("ab","B","c","d"),4);
+			assert.equal(arg.length, 3);
+		});
+
+		
+
+		QUnit.test("evaluate what this refers to", function( assert ){
+			var people = new People();
+		//	assert.equal(people.find().length, 3);
+		//	assert.equal(people.find("Sot").length, 1);
+			assert.equal(people.find("Sot", "Pap").length, 1);
+		});
+
+	};
+
+	</script>
 
 </head>
 <body>
@@ -18,23 +62,5 @@
 	<div id="second"><p>This is the second p-tag</p></div>
 
 </body>
-	<script>
-	
-		QUnit.test("test loop function", function( assert ){
-			var testArray = [0,1,2];
-			var num = 0;
-			loop(testArray, function(value, index){
-				assert.equal(value, num++);
-			});
-		});
-	
-		QUnit.test("test the array context", function( assert ){
-			assert.equal(length,0);
-			domElems.add("first");
-			assert.equal(length,1);
-			assert.equal(typeof domElems[0], 'object');
 
-		});
-
-	</script>
 </html>

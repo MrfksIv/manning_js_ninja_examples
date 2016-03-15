@@ -1,0 +1,59 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content-"width=display-wdith, initial-scale=1">
+	<link rel="stylesheet" href="http://code.jquery.com/qunit/qunit-1.21.0.css">
+	<script src="http://code.jquery.com/qunit/qunit-1.21.0.js"></script>
+	<script src="http://code.jquery.com/jquery-1.12.0.min.js"></script>
+	<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+
+
+	<script>
+	var Button = {
+			click: function() {
+				this.clicked = true;
+			}
+		}
+
+	var elem;
+
+	window.onload = function(){
+
+		/*
+		 * The bind functino solves the problem of the previous listing where the context was the
+		 * element instead of the button object.
+		 * This method is designed to create and return a new functino which will continually force
+		 * the specified context.
+		 * However this particular function makes the assumption that we are going to be modifying
+		 * an existing method (defined as a property to an object). Under this assumption we only 
+		 * need 2 pieces of info: the object name, and the method name.
+		 */
+
+		function bind(context, name) {
+			return function() {
+				context[name].apply(context, arguments);
+			};
+		}
+
+		elem = document.getElementById("test");
+		elem.addEventListener("click", bind(Button, "click"), false);
+		
+
+		QUnit.test("check where the function is binded", function(assert) {
+			elem.trigger("click");
+			assert(Button.clicked, true);
+		});
+	}
+
+	</script>
+</head>
+
+<body>
+	<div id="qunit"></div>
+	<button id="test">Click Me!</button>
+</body>
+
+
+
+</html>

@@ -1,0 +1,73 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content-"width=display-wdith, initial-scale=1">
+	<link rel="stylesheet" href="http://code.jquery.com/qunit/qunit-1.21.0.css">
+	<script src="http://code.jquery.com/qunit/qunit-1.21.0.js"></script>
+	<script src="http://code.jquery.com/jquery-1.12.0.min.js"></script>
+	<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+
+
+	<script>
+	var elem;
+
+	var myObject = {
+		a : "This is a first property",
+		b : "This is another property"
+	};
+
+	function myFunction(prop) {
+		console.log(this[prop]);
+	}
+
+	window.onload = function(){
+
+		/*
+		 * This is similar to the previous listing but now any function can be binded to any object.
+		 * myFunction can print any property of the object that it is attached/binded to.
+		 */
+
+		Function.prototype.bind = function() {
+			var fn = this;
+			
+			var	args = Array.prototype.slice.call(arguments); 	//when used in this way, 
+																//slice makes a copy of the arguments list into a new array.
+																//this way, we can use the arguments of the outer function
+																//in the inner function.
+
+			var	object = args.shift(); 							//opposite of pop() i.e removes first element of an array
+				
+				console.log("object :");
+				console.log(object);
+				console.log("---------------");
+			return function() {
+
+				return fn.apply(object,
+					args.concat(Array.prototype.slice.call(arguments)));
+			};
+		};
+
+		
+
+		QUnit.test("check whether context is set", function(assert) {
+			assert.equal(typeof myFunction, 'undefined');
+			var aFunction = myFunction.bind(myObject);
+			aFunction("a");
+			aFunction("b");
+			assert.equal(typeof aFunction, true);
+		
+		});
+	}
+
+	</script>
+</head>
+
+<body>
+	<div id="qunit"></div>
+	<button id="test">Click Me!</button>
+</body>
+
+
+
+</html>

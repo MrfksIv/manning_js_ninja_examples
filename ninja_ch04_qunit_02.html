@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content-"width=display-wdith, initial-scale=1">
+	<link rel="stylesheet" href="http://code.jquery.com/qunit/qunit-1.21.0.css">
+	<script src="http://code.jquery.com/qunit/qunit-1.21.0.js"></script>
+
+
+
+	<script>
+	var elem;
+	var Button = {
+				click: function() {
+					this.clicked = true;
+					console.log(this);
+				}
+			}
+
+		window.onload = function() {
+			
+			
+			function bind(context, name) {
+				return function(){
+					return 
+				}
+			}
+
+			QUnit.test("see which context is applied", function( assert ){
+
+				elem = document.getElementById("test");
+				elem.addEventListener("click", Button.click, false);
+				elem.trigger("click");
+				assert(elem.clicked, true);
+			});
+		}
+
+	</script>
+</head>
+
+<body>
+	<div id="qunit"></div>
+	<button id="test">Click Me!</button>
+</body>
+
+
+
+</html>
