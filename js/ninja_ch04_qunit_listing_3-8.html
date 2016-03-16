@@ -68,7 +68,7 @@
 	 		 }
 	 }
 
-	//	 String.prototype.csv = String.prototype.split.partial(/,\s*/);
+//	 String.prototype.csv = String.prototype.split.partial(/,\s*/);
 
 	// var phraseArr2 = phrase.csv();
 
@@ -83,32 +83,12 @@
 
 		QUnit.test("check if the curry function was successful", function(assert) {
 			assert.equal(add20(5), 25);
-		//	assert,equal(multiply3(5), 15);
+			assert,equal(multiply3(5), 15);
 		
 		});
 	}
 
-
-	/*
-	 * The partial function can be used to as an event binder in the following way:
-	 */
-	var bindclick;
-	
-	var delay = setTimeout.partial(undefined, 2000);
-	delay(function(){
-		console.log("delay created with partial is working");
-	})
-
-	delay();
-
-	var bindClick = function(){};
-	bindClick = document.body.addEventListener.partial("click", undefined, false);
-
-	 $('#test').bindClick(function(){
-	 	console.log("bindClick is working!");
-	 });
-
-	 </script>
+	</script>
 </head>
 
 <body>
